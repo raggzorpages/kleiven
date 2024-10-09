@@ -3,71 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Equipment | Equipment Booking and Listing</title>
+    <title>Equipment | Firebase Integration</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-    <script src="app.js"></script>
-    <script src="js/app.js"></script>
-    <script src="main.js"></script>
+
+    <!-- Add your custom scripts -->
+    <script src="app.js" defer></script>
 </head>
 <body>
 
-    <div class="container">
+    <h1>Equipment Listing and Registration</h1>
 
-        <header>
-            <h1>Our Equipment</h1>
-        </header>
-
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="reservations.html">Reservations</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-
-        <button id="add-item-button" class="add-item-button">Add Item</button>
-
-        <main>
-            <section>
-                <h2>All Equipment</h2>
-                <p>Here is a list of all our equipment available for booking.</p>
-                <div id="equipment-container" class="nav-cards">
-                    <!-- Equipment items will be dynamically injected here -->
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
-        </footer>
-
-    </div>
-
-    <!-- Modal for Adding New Equipment -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close-button">&times;</span>
-            <h2>Add New Equipment</h2>
-            <form id="add-item-form">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-                
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required></textarea>
-                
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
-                
-                <label for="image_url">Image Filename (e.g., camera.jpg):</label>
-                <input type="text" id="image_url" name="image_url" required>
-                
-                <button type="submit">Add Item</button>
-            </form>
+    <!-- Equipment Listing Section -->
+    <section>
+        <h2>Available Equipment</h2>
+        <div id="equipment-container">
+            <!-- Equipment will be dynamically inserted here -->
         </div>
-    </div>
+    </section>
+
+    <!-- Equipment Registration Form -->
+    <section>
+        <h2>Register New Equipment</h2>
+        <form id="equipment-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="location">Location (e.g., R1H1):</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="image_url">Image Filename (e.g., camera.jpg):</label>
+            <input type="text" id="image_url" name="image_url" required>
+
+            <button type="submit">Add Equipment</button>
+        </form>
+    </section>
 
 </body>
 </html>

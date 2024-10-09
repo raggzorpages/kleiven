@@ -1,6 +1,6 @@
 // Import Firebase SDK and Firestore functions from the CDN
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Fetch equipment from Firestore and display it in the HTML
+// Function to fetch and display equipment from Firestore
 async function fetchEquipment() {
   const equipmentContainer = document.getElementById('equipment-container');
   equipmentContainer.innerHTML = ''; // Clear any existing content
@@ -45,5 +45,41 @@ async function fetchEquipment() {
   }
 }
 
-// Fetch and display equipment when the page loads
+// Function to handle adding new equipment
+async function addEquipment(event) {
+  event.preventDefault(); // Prevent the form from refreshing the page
+
+  // Get form values
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const imageUrl = document.getElementById('image_url').value.trim();
+
+  try {
+    // Add new document to the 'equipment' collection
+    await addDoc(collection(db, "equipment"), {
+      title,
+      description,
+      location,
+      image_url: imageUrl
+    });
+
+    // Clear the form
+    document.getElementById('equipment-form').reset();
+
+    // Refresh the equipment list
+    fetchEquipment();
+    
+    alert("Equipment added successfully!");
+
+  } catch (error) {
+    console.error("Error adding equipment:", error);
+    alert("Failed to add equipment.");
+  }
+}
+
+// Fetch equipment when the page loads
 document.addEventListener("DOMContentLoaded", fetchEquipment);
+
+// Listen for form submission
+document.getElementById('equipment-form').addEventListener('submit', addEquipment);
