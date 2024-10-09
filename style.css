@@ -332,3 +332,22 @@ footer {
     top: 10px;
     cursor: pointer;
 }
+
+.add-equipment-button {
+    background-color: #9E2B25; /* Dark red background color */
+    color: #FFFFFF; /* White text */
+    padding: 12px 24px; /* Add some padding for the button */
+    border: none; /* Remove the default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold text */
+    font-size: 16px; /* Slightly larger font size */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 20px 0; /* Add some margin to the button */
+}
+
+.add-equipment-button:hover {
+    background-color: #7F211B; /* Darker red when hovering */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+}
