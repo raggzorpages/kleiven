@@ -79,15 +79,17 @@ async function addEquipment(event) {
   }
 }
 
-// Modal Handling
+// Select modal, button, and close elements
 const modal = document.getElementById("equipmentModal");
 const openModalButton = document.getElementById("openModalButton");
 const closeModalButton = document.getElementsByClassName("close-button")[0];
 
+// Function to open modal
 function openModal() {
   modal.style.display = "block";
 }
 
+// Function to close modal
 function closeModal() {
   modal.style.display = "none";
 }
@@ -104,6 +106,7 @@ window.addEventListener('click', (event) => {
     closeModal();
   }
 });
+
 
 // Fetch equipment when the page loads
 document.addEventListener("DOMContentLoaded", fetchEquipment);
