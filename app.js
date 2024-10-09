@@ -30,13 +30,14 @@ async function fetchEquipment() {
 
       // Create a card for each equipment item
       const equipmentCard = document.createElement('div');
+      equipmentCard.classList.add('nav-card');
       equipmentCard.innerHTML = `
         <h3>${item.title}</h3>
         <p>Location: ${item.location}</p>
         <p>${item.description}</p>
         <img src="images/${item.image_url}" alt="${item.title}" style="width: 100px;">
       `;
-      
+
       // Append the new equipment card to the container
       equipmentContainer.appendChild(equipmentCard);
     });
@@ -69,7 +70,7 @@ async function addEquipment(event) {
 
     // Refresh the equipment list
     fetchEquipment();
-    
+
     alert("Equipment added successfully!");
 
   } catch (error) {
