@@ -313,3 +313,18 @@ form button {
 form button:hover {
     background-color: #7F211B;
 }
+.remove-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .remove-button:hover {
+    background-color: #ff1a1a;
+  }
+  
