@@ -20,23 +20,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);  // Optional: Initialize Firebase Analytics
 const db = getDatabase(app);  // Initialize Realtime Database
 
-// Function to add new equipment to the database
-async function addEquipment(title, description, location, imageUrl) {
-  try {
-    const newEquipmentRef = push(ref(db, 'equipment/'));
-    await set(newEquipmentRef, {
-      title: title,
-      description: description,
-      location: location,
-      image_url: imageUrl
-    });
-    alert('Equipment added successfully!');
-  } catch (error) {
-    console.error("Error adding equipment:", error);
-    alert("Failed to add equipment.");
-  }
-}
-
 // Function to render equipment to the page
 function renderEquipment(equipmentData) {
   const equipmentContainer = document.getElementById('equipment-container');
@@ -67,6 +50,39 @@ function setupRealtimeListener() {
       console.log("No equipment data available");
     }
   });
+}
+
+// Function to add new equipment to the database and update UI immediately
+async function addEquipment(title, description, location, imageUrl) {
+  try {
+    const newEquipmentRef = push(ref(db, 'equipment/'));
+    const newEquipmentKey = newEquipmentRef.key;  // Get the unique key for the new entry
+
+    // Add new equipment to Firebase
+    await set(newEquipmentRef, {
+      title: title,
+      description: description,
+      location: location,
+      image_url: imageUrl
+    });
+
+    // Add the new equipment entry immediately to the UI without waiting for database update
+    const equipmentContainer = document.getElementById('equipment-container');
+    const equipmentCard = document.createElement('div');
+    equipmentCard.classList.add('nav-card');
+    equipmentCard.innerHTML = `
+      <h3>${title}</h3>
+      <p>Location: ${location}</p>
+      <p>${description}</p>
+      <img src="images/${imageUrl}" alt="${title}" style="width: 100px;">
+    `;
+    equipmentContainer.appendChild(equipmentCard);
+
+    alert('Equipment added successfully!');
+  } catch (error) {
+    console.error("Error adding equipment:", error);
+    alert("Failed to add equipment.");
+  }
 }
 
 // Fetch and display equipment in real-time on page load
