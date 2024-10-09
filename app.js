@@ -24,7 +24,7 @@ async function fetchEquipment() {
 
   try {
     // Fetch all documents from the 'equipment' collection
-    const querySnapshot = await getDocs(collection(db, "equipment"));
+    const querySnapshot = await db.collection("equipment").get();
     querySnapshot.forEach((doc) => {
       const item = doc.data(); // Extract data from Firestore document
 
@@ -58,7 +58,7 @@ async function addEquipment(event) {
 
   try {
     // Add new document to the 'equipment' collection
-    await addDoc(collection(db, "equipment"), {
+    await db.collection("equipment").add({
       title,
       description,
       location,
@@ -79,17 +79,15 @@ async function addEquipment(event) {
   }
 }
 
-// Select modal, button, and close elements
+// Modal Handling
 const modal = document.getElementById("equipmentModal");
 const openModalButton = document.getElementById("openModalButton");
 const closeModalButton = document.getElementsByClassName("close-button")[0];
 
-// Function to open modal
 function openModal() {
   modal.style.display = "block";
 }
 
-// Function to close modal
 function closeModal() {
   modal.style.display = "none";
 }
@@ -106,7 +104,6 @@ window.addEventListener('click', (event) => {
     closeModal();
   }
 });
-
 
 // Fetch equipment when the page loads
 document.addEventListener("DOMContentLoaded", fetchEquipment);
