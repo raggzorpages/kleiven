@@ -15,34 +15,67 @@
 </head>
 <body>
 
-    <header>
-        <h1>Our Equipment</h1>
-    </header>
+    <div class="container">
 
-    <nav>
-        <!-- Same navigation as in index.html -->
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="equipment.html">Equipment</a></li>
-            <li><a href="reservations.html">Reservations</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
+        <header>
+            <h1>Our Equipment</h1>
+        </header>
 
-    <main>
-        <!-- Content specific to this page -->
-        <section>
-            <h2>All Equipment</h2>
-            <p>Here is a list of all our equipment available for booking.</p>
-            <div id="equipment-container" class="nav-cards">
-                <!-- Equipment items will be injected here -->
-            </div>
-        </section>
-    </main>
+        <nav>
+            <!-- Updated navigation -->
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
 
-    <footer>
-        <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
-    </footer>
+        <!-- Add Item Button -->
+        <button id="add-item-button" class="add-item-button">Add Item</button>
+
+        <main>
+            <!-- Content specific to this page -->
+            <section>
+                <h2>All Equipment</h2>
+                <p>Here is a list of all our equipment available for booking.</p>
+                <div id="equipment-container" class="nav-cards">
+                    <!-- Equipment items will be injected here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- Modal Form for Adding New Item -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-button">&times;</span>
+            <h2>Add New Equipment</h2>
+            <form id="add-item-form">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <label for="location">Location (e.g., R1H1):</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="image_url">Image Filename (e.g., parykk.jpg):</label>
+                <input type="text" id="image_url" name="image_url" required>
+
+                <button type="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include main.js at the end for proper loading -->
+    <script src="main.js"></script>
 
 </body>
 </html>
