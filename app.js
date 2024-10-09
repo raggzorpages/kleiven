@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getDatabase, ref, set, get, child, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
@@ -7,7 +7,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebas
 const firebaseConfig = {
   apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
   authDomain: "kleiven-d995b.firebaseapp.com",
-  databaseURL: "https://kleiven-d995b-default-rtdb.firebaseio.com/",  // Ensure database URL is added
+  databaseURL: "https://kleiven-d995b-default-rtdb.europe-west1.firebasedatabase.app",  // Updated to correct region
   projectId: "kleiven-d995b",
   storageBucket: "kleiven-d995b.appspot.com",
   messagingSenderId: "790753027743",
@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);  // Optional: Initialize Firebase Analytics
+const analytics = getAnalytics(app);  // Initialize Firebase Analytics (optional)
 const db = getDatabase(app);  // Initialize Realtime Database
 
 // Function to add new equipment to the database
