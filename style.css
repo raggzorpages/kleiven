@@ -328,3 +328,55 @@ form button:hover {
     background-color: #ff1a1a;
   }
   
+  /* Form Styles (Update) */
+form {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5E6B50;  /* Match the color scheme */
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 2px solid #5E6B50;  /* Greenish border to match the site theme */
+    border-radius: 6px;  /* Rounded corners for consistency */
+    background-color: #F0EBD8;  /* Light background color */
+    color: #5E6B50;  /* Text color matching the theme */
+    font-size: 16px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);  /* Subtle shadow inside */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;  /* Smooth hover effect */
+}
+
+form input:focus, form textarea:focus {
+    border-color: #9E2B25;  /* Change border color on focus to highlight the input */
+    box-shadow: 0 0 6px rgba(158, 43, 37, 0.5);  /* Light red shadow on focus */
+    outline: none;  /* Remove default outline */
+}
+
+form button {
+    background-color: #9E2B25;  /* Dark red submit button */
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;  /* Smooth hover effect */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+}
+
+form button:hover {
+    background-color: #7F211B;  /* Darker red on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);  /* Deeper shadow on hover */
+}
