@@ -1,5 +1,7 @@
 // main.js
 
+console.log(supabase);
+
 // Function to fetch equipment data from Supabase
 async function fetchEquipment() {
   const { data: equipment, error } = await supabase
