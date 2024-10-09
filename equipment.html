@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipment | Equipment Booking and Listing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Supabase JS library -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <!-- Include app.js -->
+    <script src="app.js"></script>
+    <!-- Include main.js -->
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Our Equipment</h1>
+    </header>
+
+    <nav>
+        <!-- Same navigation as in index.html -->
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="equipment.html">Equipment</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Content specific to this page -->
+        <section>
+            <h2>All Equipment</h2>
+            <p>Here is a list of all our equipment available for booking.</p>
+            <div id="equipment-container" class="nav-cards">
+                <!-- Equipment items will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

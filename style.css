@@ -1,0 +1,126 @@
+/* Basic CSS styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 20px 0;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+nav ul {
+    background-color: #005bb5;
+    overflow: hidden;
+    color: white;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+footer {
+    background-color: #0073e6;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Nav-Card Styles */
+.nav-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-card {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    margin: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+}
+
+.nav-card h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.nav-card .location {
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.nav-card p {
+    font-size: 0.95em;
+    color: #555;
+    margin: 10px 0;
+}
+
+.nav-card button {
+    margin: 15px 0;
+    padding: 10px 15px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-card button:hover {
+    background-color: #005bb5;
+}
+
+.nav-card img {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    max-width: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        padding: 10px;
+    }
+
+    .nav-card {
+        flex: 1 1 100%;
+    }
+}
