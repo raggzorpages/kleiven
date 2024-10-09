@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
 
 // Your web app's Firebase configuration
@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);  // Optional: Initialize Firebase Analytics
 const db = getDatabase(app);  // Initialize Realtime Database
 
-// Function to render equipment to the page
+// Function to render equipment to the page, including remove button
 function renderEquipment(equipmentData) {
   const equipmentContainer = document.getElementById('equipment-container');
   equipmentContainer.innerHTML = '';  // Clear previous content
@@ -34,9 +34,33 @@ function renderEquipment(equipmentData) {
       <p>Location: ${item.location}</p>
       <p>${item.description}</p>
       <img src="images/${item.image_url}" alt="${item.title}" style="width: 100px;">
+      <button class="remove-button" data-id="${id}">Remove</button>
     `;
     equipmentContainer.appendChild(equipmentCard);
   }
+
+  // Add event listeners to all remove buttons
+  const removeButtons = document.querySelectorAll('.remove-button');
+  removeButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const equipmentId = this.getAttribute('data-id');
+      removeEquipment(equipmentId);
+    });
+  });
+}
+
+// Function to remove equipment from Firebase and update the UI
+function removeEquipment(equipmentId) {
+  const equipmentRef = ref(db, 'equipment/' + equipmentId);
+  remove(equipmentRef)
+    .then(() => {
+      console.log(`Equipment with ID: ${equipmentId} removed successfully.`);
+      alert('Equipment removed successfully!');
+    })
+    .catch((error) => {
+      console.error("Error removing equipment:", error);
+      alert('Failed to remove equipment.');
+    });
 }
 
 // Real-time listener for equipment data
@@ -45,7 +69,7 @@ function setupRealtimeListener() {
   onValue(equipmentRef, (snapshot) => {
     const equipmentData = snapshot.val();
     if (equipmentData) {
-      renderEquipment(equipmentData);  // Update the UI with new data in real time
+      renderEquipment(equipmentData);  // Update the UI with new data in real-time
     } else {
       console.log("No equipment data available");
     }
@@ -65,18 +89,6 @@ async function addEquipment(title, description, location, imageUrl) {
       location: location,
       image_url: imageUrl
     });
-
-    // Add the new equipment entry immediately to the UI without waiting for database update
-    const equipmentContainer = document.getElementById('equipment-container');
-    const equipmentCard = document.createElement('div');
-    equipmentCard.classList.add('nav-card');
-    equipmentCard.innerHTML = `
-      <h3>${title}</h3>
-      <p>Location: ${location}</p>
-      <p>${description}</p>
-      <img src="images/${imageUrl}" alt="${title}" style="width: 100px;">
-    `;
-    equipmentContainer.appendChild(equipmentCard);
 
     alert('Equipment added successfully!');
   } catch (error) {
