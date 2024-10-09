@@ -1,8 +1,4 @@
-// Import Firebase SDK and Firestore functions from the CDN
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-
-// Your Firebase configuration
+// Initialize Firebase with your config (this config should match the one in your Firebase project)
 const firebaseConfig = {
   apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
   authDomain: "kleiven-d995b.firebaseapp.com",
@@ -14,8 +10,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // Function to fetch and display equipment from Firestore
 async function fetchEquipment() {
@@ -24,7 +20,7 @@ async function fetchEquipment() {
 
   try {
     // Fetch all documents from the 'equipment' collection in Firestore
-    const querySnapshot = await getDocs(collection(db, "equipment"));
+    const querySnapshot = await db.collection("equipment").get();
     querySnapshot.forEach((doc) => {
       const item = doc.data(); // Extract data from Firestore document
 
@@ -58,7 +54,7 @@ async function addEquipment(event) {
 
   try {
     // Add new document to the 'equipment' collection in Firestore
-    await addDoc(collection(db, "equipment"), {
+    await db.collection("equipment").add({
       title,
       description,
       location,
