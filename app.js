@@ -64,8 +64,8 @@ async function addEquipment(event) {
       image_url: imageUrl
     });
 
-    // Clear the form
-    document.getElementById('equipment-form').reset();
+    // Close the modal
+    closeModal();
 
     // Refresh the equipment list
     fetchEquipment();
@@ -77,6 +77,32 @@ async function addEquipment(event) {
     alert("Failed to add equipment.");
   }
 }
+
+// Modal Handling
+const modal = document.getElementById("equipmentModal");
+const openModalButton = document.getElementById("openModalButton");
+const closeModalButton = document.getElementsByClassName("close-button")[0];
+
+function openModal() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+// Open modal when button is clicked
+openModalButton.addEventListener('click', openModal);
+
+// Close modal when 'x' button is clicked
+closeModalButton.addEventListener('click', closeModal);
+
+// Close modal if clicking outside the modal content
+window.addEventListener('click', (event) => {
+  if (event.target == modal) {
+    closeModal();
+  }
+});
 
 // Fetch equipment when the page loads
 document.addEventListener("DOMContentLoaded", fetchEquipment);
