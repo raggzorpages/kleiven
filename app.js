@@ -1,82 +1,84 @@
-// Initialize Firebase with your config (this config should match the one in your Firebase project)
-const firebaseConfig = {
-  apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
-  authDomain: "kleiven-d995b.firebaseapp.com",
-  projectId: "kleiven-d995b",
-  storageBucket: "kleiven-d995b.appspot.com",
-  messagingSenderId: "790753027743",
-  appId: "1:790753027743:web:ab93c56a9671e6a4e9a4aa",
-  measurementId: "G-Q14Q0XLGS6"
-};
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
+  import { getDatabase, ref, set, get, child, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
+    authDomain: "kleiven-d995b.firebaseapp.com",
+    databaseURL: "https://kleiven-d995b-default-rtdb.firebaseio.com/",  // Ensure you add the databaseURL
+    projectId: "kleiven-d995b",
+    storageBucket: "kleiven-d995b.appspot.com",
+    messagingSenderId: "790753027743",
+    appId: "1:790753027743:web:ab93c56a9671e6a4e9a4aa",
+    measurementId: "G-Q14Q0XLGS6"
+  };
 
-// Function to fetch and display equipment from Firestore
-async function fetchEquipment() {
-  const equipmentContainer = document.getElementById('equipment-container');
-  equipmentContainer.innerHTML = ''; // Clear any existing content
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);  // Initialize Realtime Database
 
-  try {
-    // Fetch all documents from the 'equipment' collection in Firestore
-    const querySnapshot = await db.collection("equipment").get();
-    querySnapshot.forEach((doc) => {
-      const item = doc.data(); // Extract data from Firestore document
-
-      // Create a card for each equipment item
-      const equipmentCard = document.createElement('div');
-      equipmentCard.classList.add('nav-card');
-      equipmentCard.innerHTML = `
-        <h3>${item.title}</h3>
-        <p>Location: ${item.location}</p>
-        <p>${item.description}</p>
-        <img src="images/${item.image_url}" alt="${item.title}" style="width: 100px;">
-      `;
-
-      // Append the new equipment card to the container
-      equipmentContainer.appendChild(equipmentCard);
-    });
-  } catch (error) {
-    console.error("Error fetching equipment:", error);
+  // Function to add new equipment to the database
+  async function addEquipment(title, description, location, imageUrl) {
+    try {
+      const newEquipmentRef = push(ref(db, 'equipment/'));
+      await set(newEquipmentRef, {
+        title: title,
+        description: description,
+        location: location,
+        image_url: imageUrl
+      });
+      alert('Equipment added successfully!');
+    } catch (error) {
+      console.error("Error adding equipment:", error);
+      alert("Failed to add equipment.");
+    }
   }
-}
 
-// Function to handle adding new equipment
-async function addEquipment(event) {
-  event.preventDefault(); // Prevent the form from refreshing the page
+  // Function to fetch and display equipment from the database
+  async function fetchEquipment() {
+    const dbRef = ref(db);
+    try {
+      const snapshot = await get(child(dbRef, `equipment/`));
+      if (snapshot.exists()) {
+        const equipmentData = snapshot.val();
+        const equipmentContainer = document.getElementById('equipment-container');
+        equipmentContainer.innerHTML = '';  // Clear previous content
 
-  // Get form values
-  const title = document.getElementById('title').value.trim();
-  const description = document.getElementById('description').value.trim();
-  const location = document.getElementById('location').value.trim();
-  const imageUrl = document.getElementById('image_url').value.trim();
+        for (let id in equipmentData) {
+          const item = equipmentData[id];
+          const equipmentCard = document.createElement('div');
+          equipmentCard.classList.add('nav-card');
+          equipmentCard.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>Location: ${item.location}</p>
+            <p>${item.description}</p>
+            <img src="images/${item.image_url}" alt="${item.title}" style="width: 100px;">
+          `;
+          equipmentContainer.appendChild(equipmentCard);
+        }
+      } else {
+        console.log("No equipment data available");
+      }
+    } catch (error) {
+      console.error("Error fetching equipment:", error);
+    }
+  }
 
-  try {
-    // Add new document to the 'equipment' collection in Firestore
-    await db.collection("equipment").add({
-      title,
-      description,
-      location,
-      image_url: imageUrl
-    });
+  // Fetch equipment on page load
+  document.addEventListener("DOMContentLoaded", fetchEquipment);
 
-    // Refresh the equipment list
-    fetchEquipment();
-
-    // Clear the form after submission
+  // Add event listener to the equipment form
+  document.getElementById('equipment-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const title = document.getElementById('title').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const location = document.getElementById('location').value.trim();
+    const imageUrl = document.getElementById('image_url').value.trim();
+    addEquipment(title, description, location, imageUrl);
     document.getElementById('equipment-form').reset();
-
-    alert("Equipment added successfully!");
-
-  } catch (error) {
-    console.error("Error adding equipment:", error);
-    alert("Failed to add equipment.");
-  }
-}
-
-// Fetch equipment when the page loads
-document.addEventListener("DOMContentLoaded", fetchEquipment);
-
-// Listen for form submission
-document.getElementById('equipment-form').addEventListener('submit', addEquipment);
+  });
+</script>
