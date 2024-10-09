@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Equipment | Equipment Booking and Listing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Equipment | Equipment Booking and Listing</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Supabase JS Library -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script type="module" src="app.js"></script>
-    <script type="module" src="main.js"></script>
-    <script type="module" src="reservations.js"></script>
+    <!-- Include app.js to initialize Supabase client -->
+    <script src="app.js"></script>
+    <!-- Include main.js for functionality -->
+    <script src="main.js"></script>
 </head>
 <body>
 
@@ -19,7 +21,6 @@
         </header>
 
         <nav>
-            <!-- Updated navigation -->
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="equipment.html">Equipment</a></li>
@@ -28,16 +29,14 @@
             </ul>
         </nav>
 
-        <!-- Add Item Button -->
         <button id="add-item-button" class="add-item-button">Add Item</button>
 
         <main>
-            <!-- Content specific to this page -->
             <section>
                 <h2>All Equipment</h2>
                 <p>Here is a list of all our equipment available for booking.</p>
                 <div id="equipment-container" class="nav-cards">
-                    <!-- Equipment items will be injected here -->
+                    <!-- Equipment items will be dynamically injected here -->
                 </div>
             </section>
         </main>
@@ -48,7 +47,7 @@
 
     </div>
 
-    <!-- Modal Form for Adding New Item -->
+    <!-- Modal for Adding New Equipment -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span id="close-modal" class="close-button">&times;</span>
@@ -56,23 +55,20 @@
             <form id="add-item-form">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
-
+                
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required></textarea>
-
-                <label for="location">Location (e.g., R1H1):</label>
+                
+                <label for="location">Location:</label>
                 <input type="text" id="location" name="location" required>
-
-                <label for="image_url">Image Filename (e.g., parykk.jpg):</label>
+                
+                <label for="image_url">Image Filename (e.g., camera.jpg):</label>
                 <input type="text" id="image_url" name="image_url" required>
-
+                
                 <button type="submit">Add Item</button>
             </form>
         </div>
     </div>
-
-    <!-- Include main.js at the end for proper loading -->
-    <script src="main.js"></script>
 
 </body>
 </html>

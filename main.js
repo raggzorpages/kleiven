@@ -1,8 +1,6 @@
 // main.js
 
-// Existing functions...
-
-// Function to fetch equipment data
+// Function to fetch equipment data from Supabase
 async function fetchEquipment() {
   const { data: equipment, error } = await supabase
     .from('equipment')
@@ -24,7 +22,7 @@ async function fetchEquipment() {
     // Add content to nav-card
     navCard.innerHTML = `
       <h3>${item.title}</h3>
-      <p class="location">Loc: ${item.location}</p>
+      <p class="location">Location: ${item.location}</p>
       <p>${item.description}</p>
       <button onclick="addToReservation(${item.id})">Add to reservation</button>
       <img src="images/${item.image_url}" alt="${item.title}">
@@ -36,10 +34,8 @@ async function fetchEquipment() {
 
 // Function to handle adding items to reservation
 function addToReservation(equipmentId) {
-  // Retrieve existing reservations from localStorage
   let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
-  // Add the new equipment ID to the reservations if not already present
   if (!reservations.includes(equipmentId)) {
     reservations.push(equipmentId);
     localStorage.setItem('reservations', JSON.stringify(reservations));
@@ -49,7 +45,7 @@ function addToReservation(equipmentId) {
   }
 }
 
-// Event listeners for Add Item modal
+// Event listener for Add Item modal and form submission
 document.addEventListener('DOMContentLoaded', () => {
   const addItemButton = document.getElementById('add-item-button');
   const modal = document.getElementById('modal');
@@ -73,17 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Handle form submission
+  // Handle form submission to add new equipment
   addItemForm.addEventListener('submit', async event => {
     event.preventDefault();
 
-    // Get form values
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const location = document.getElementById('location').value.trim();
     const image_url = document.getElementById('image_url').value.trim();
 
-    // Insert new item into Supabase
     const { data, error } = await supabase
       .from('equipment')
       .insert([{ title, description, location, image_url }]);
@@ -93,12 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('There was an error adding the item.');
     } else {
       alert('Item added successfully!');
-      // Close the modal
-      modal.style.display = 'none';
-      // Reset the form
-      addItemForm.reset();
-      // Refresh the equipment list
-      fetchEquipment();
+      modal.style.display = 'none';  // Close the modal
+      addItemForm.reset();  // Reset the form
+      fetchEquipment();  // Refresh the equipment list
     }
   });
 });
