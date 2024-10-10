@@ -1,5 +1,5 @@
 // FullCalendar initialization inside DOMContentLoaded event
-export function initCalendar() {
+document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     // Initialize FullCalendar using the global FullCalendar object
@@ -35,10 +35,10 @@ export function initCalendar() {
     console.log('Rendering calendar...');
     calendar.render();
     console.log('Calendar rendered successfully.');
-}
+});
 
 // Function to display reservations (you can export this if needed)
-export function displayReservations() {
+function displayReservations() {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
     if (reservations.length === 0) {
@@ -61,7 +61,7 @@ export function displayReservations() {
 }
 
 // Function to remove items from reservation
-export function removeFromReservation(item) {
+function removeFromReservation(item) {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
     reservations = reservations.filter(reservedItem => reservedItem !== item);
     localStorage.setItem('reservations', JSON.stringify(reservations));
