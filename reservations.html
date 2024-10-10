@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>Your Reservations | Equipment Booking and Listing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="calendar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="calendar.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,9 +25,9 @@
 
     <main>
         <section>
-            <h2>Your Reservation Calendar</h2>
-            <!-- Calendar container -->
-            <div id="calendar"></div>
+            <h2>Select Your Reservation Date</h2>
+            <!-- Flatpickr date input -->
+            <input type="text" id="calendar" placeholder="Select a date" />
         </section>
         <section>
             <h2>Your Reservation Basket</h2>
@@ -41,5 +40,8 @@
     <footer>
         <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
     </footer>
+
+    <!-- Custom JS -->
+    <script src="calendar.js"></script>
 </body>
 </html>

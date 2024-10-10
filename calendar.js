@@ -1,31 +1,15 @@
+// Wait for the DOM to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // Shows a month grid by default
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        selectable: true,  // Users can select dates
-        selectHelper: true, // Highlight the selected area
-        select: function(info) {
-            // Alert with selected date range
-            alert('Selected date: ' + info.startStr + ' to ' + info.endStr);
-        },
-        events: [
-            {
-                title: 'Existing Reservation',
-                start: '2024-10-12',
-                end: '2024-10-14'
-            },
-            {
-                title: 'Another Event',
-                start: '2024-10-16'
-            }
-        ]
+    
+    // Initialize Flatpickr on the input element with id "calendar"
+    flatpickr("#calendar", {
+        dateFormat: "Y-m-d", // Set the date format to Year-Month-Day
+        minDate: "today",    // Prevent past dates from being selectable
+        defaultDate: null,   // No default date, allows the user to pick any future date
+        onChange: function(selectedDates, dateStr, instance) {
+            // This function is triggered whenever a date is selected
+            console.log('Selected date: ' + dateStr); // Log the selected date
+            alert('You have selected: ' + dateStr);   // Alert the user of the selected date
+        }
     });
-
-    calendar.render();
 });
