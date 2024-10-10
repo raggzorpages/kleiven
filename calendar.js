@@ -1,15 +1,12 @@
-// FullCalendar initialization inside DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
+// Import FullCalendar from the CDN
+import { Calendar } from 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js';
+
+// Initialize the calendar
+export function initCalendar() {
     var calendarEl = document.getElementById('calendar');
 
-    // Ensure FullCalendar is loaded before using it
-    if (typeof FullCalendar === 'undefined') {
-        console.error('FullCalendar is not defined. Ensure FullCalendar JS is loaded before this script.');
-        return;
-    }
-
-    // Initialize FullCalendar on the element
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    // Initialize FullCalendar
+    var calendar = new Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
@@ -41,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Rendering calendar...');
     calendar.render();
     console.log('Calendar rendered successfully.');
-});
+}
 
-// Function to display reservations
-function displayReservations() {
+// Function to display reservations (you can export this if needed)
+export function displayReservations() {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
     if (reservations.length === 0) {
@@ -67,7 +64,7 @@ function displayReservations() {
 }
 
 // Function to remove items from reservation
-function removeFromReservation(item) {
+export function removeFromReservation(item) {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
     reservations = reservations.filter(reservedItem => reservedItem !== item);
     localStorage.setItem('reservations', JSON.stringify(reservations));

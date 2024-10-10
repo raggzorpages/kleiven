@@ -46,11 +46,15 @@
         <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
     </footer>
 
-    <!-- FullCalendar JS (Make sure this is loaded first) -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
-    
-    <!-- Link to your custom calendar.js -->
-    <script src="calendar.js"></script>
+    <!-- Load calendar.js as an ES6 module -->
+    <script type="module">
+        import { initCalendar } from './calendar.js';
+
+        // Initialize the calendar when the DOM content is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initCalendar();
+        });
+    </script>
 
 </body>
 </html>
