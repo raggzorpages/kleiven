@@ -30,22 +30,6 @@
     </form>
   </main>
 
-  <script type="module">
-    import { addBooking } from './booking.js';
-
-    document.getElementById('contact-form').addEventListener('submit', (event) => {
-      event.preventDefault();
-      
-      const bookingName = document.getElementById('bookingName').value;
-      const contact = document.getElementById('contact').value;
-      const dateFrom = document.getElementById('dateFrom').value;
-      const dateTo = document.getElementById('dateTo').value;
-
-      addBooking(bookingName, contact, dateFrom, dateTo);  // Add the new booking
-
-      alert('Booking submitted!');
-      document.getElementById('contact-form').reset();  // Reset the form after submission
-    });
-  </script>
+  <script type="module" src="contact.js"></script> <!-- Link contact.js -->
 </body>
 </html>

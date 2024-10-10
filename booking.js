@@ -21,10 +21,25 @@ const db = getDatabase(app);
 // Reference to bookings in Firebase
 const bookingsRef = ref(db, 'bookings/');
 
-// Function to render bookings to the table
-function renderBookings(bookingsData) {
+// Export function to add a booking
+export function addBooking(bookingName, contact, dateFrom, dateTo) {
+  const newBookingRef = push(bookingsRef);  // Create a new booking reference
+  set(newBookingRef, {
+    bookingName: bookingName,
+    contact: contact,
+    dateFrom: dateFrom,
+    dateTo: dateTo
+  }).then(() => {
+    console.log("Booking added to Firebase:", bookingName, contact, dateFrom, dateTo);
+  }).catch((error) => {
+    console.error("Error adding booking to Firebase:", error);
+  });
+}
+
+// Function to render bookings in the booking table
+export function renderBookings(bookingsData) {
   const bookingTableBody = document.getElementById('booking-table-body');
-  bookingTableBody.innerHTML = ''; // Clear previous data
+  bookingTableBody.innerHTML = '';  // Clear previous data
 
   for (let id in bookingsData) {
     const booking = bookingsData[id];
@@ -39,7 +54,7 @@ function renderBookings(bookingsData) {
   }
 }
 
-// Real-time listener for bookings
+// Real-time listener to update the booking table and calendar
 onValue(bookingsRef, (snapshot) => {
   const bookingsData = snapshot.val();
   if (bookingsData) {
@@ -49,18 +64,3 @@ onValue(bookingsRef, (snapshot) => {
     console.log("No bookings available.");
   }
 });
-
-// Function to add a new booking
-export function addBooking(bookingName, contact, dateFrom, dateTo) {
-  const newBookingRef = push(bookingsRef);  // Create a new booking reference
-  set(newBookingRef, {
-    bookingName: bookingName,
-    contact: contact,
-    dateFrom: dateFrom,
-    dateTo: dateTo
-  }).then(() => {
-    console.log("Booking added to Firebase:", bookingName, contact, dateFrom, dateTo);
-  }).catch((error) => {
-    console.error("Error adding booking to Firebase:", error);
-  });
-}
