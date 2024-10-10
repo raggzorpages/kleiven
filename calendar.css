@@ -1,11 +1,13 @@
 /* Styling for the reservation calendar */
 #calendar {
     max-width: 100%;
+    width: 80%; /* Ensure the calendar takes up 80% of the page width */
     margin: 20px auto;
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    height: 500px; /* Specify a height for the calendar */
 }
 
 /* Additional styling for reservation basket section */
