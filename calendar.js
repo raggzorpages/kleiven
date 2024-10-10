@@ -1,12 +1,9 @@
-// Import FullCalendar as an ES6 module
-import { Calendar } from 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.min.js';
-
-// Initialize the calendar
+// FullCalendar initialization inside DOMContentLoaded event
 export function initCalendar() {
     var calendarEl = document.getElementById('calendar');
 
-    // Initialize FullCalendar
-    var calendar = new Calendar(calendarEl, {
+    // Initialize FullCalendar using the global FullCalendar object
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
