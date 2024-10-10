@@ -55,3 +55,20 @@ h2 {
         padding: 10px; /* Adjust padding for smaller screens */
     }
 }
+
+/* Style the delete button */
+.delete-button {
+    background-color: #9E2B25; /* Dark red background */
+    color: #FFFFFF; /* White text */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .delete-button:hover {
+    background-color: #7F211B; /* Darker red on hover */
+    color: #FFFFFF;
+  }
+  

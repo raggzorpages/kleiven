@@ -1,6 +1,6 @@
 // Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+import { getDatabase, ref, onValue, push, set, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -36,6 +36,18 @@ export function addBooking(bookingName, contact, dateFrom, dateTo) {
   });
 }
 
+// Function to delete a booking from Firebase
+export function deleteBooking(bookingId) {
+  const bookingRef = ref(db, 'bookings/' + bookingId);
+  remove(bookingRef)
+    .then(() => {
+      console.log(`Booking with ID: ${bookingId} deleted successfully.`);
+    })
+    .catch((error) => {
+      console.error("Error deleting booking:", error);
+    });
+}
+
 // Function to render bookings in the booking table
 export function renderBookings(bookingsData) {
   const bookingTableBody = document.getElementById('booking-table-body');
@@ -49,9 +61,19 @@ export function renderBookings(bookingsData) {
       <td>${booking.bookingName}</td>
       <td>${booking.contact}</td>
       <td>${booking.dateFrom} to ${booking.dateTo}</td>
+      <td><button class="delete-button" data-id="${id}">Delete</button></td>  <!-- Add delete button -->
     `;
     bookingTableBody.appendChild(row);
   }
+
+  // Add event listeners to the delete buttons
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const bookingId = this.getAttribute('data-id');
+      deleteBooking(bookingId);  // Call delete function
+    });
+  });
 }
 
 // Real-time listener to update the booking table and calendar
