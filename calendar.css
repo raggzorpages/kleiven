@@ -11,9 +11,9 @@ body {
     width: 100%; /* Ensure the calendar takes up 100% of the parent width until max-width */
     padding: 10px;
     border-radius: 10px;
-    background-color: #EAEAEA; /* Light background */
+    background-color: #947822; /* Match the form background */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    color: #5E6B50; /* Match the text color */
+    color: #FFFFFF; /* Match the text color */
     margin: 0 auto; /* Center the calendar on the page */
   }
   
@@ -74,7 +74,6 @@ body {
     overflow: hidden; /* Prevent overflow within the cell */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
     color: #5E6B50; /* Default text color (dark green) */
-    font-size: 0.9em; /* Font size for text content */
   }
   
   .day-number::before {
@@ -88,12 +87,12 @@ body {
   
   .day-number:hover {
     background-color: #D5CDB6; /* Mid-tone background on hover */
-    color: #333333; /* Darker gray text on hover for better contrast */
+    color: #5E6B50; /* Darker text for hover */
     cursor: pointer;
   }
   
   .day-number:hover::before {
-    color: #333333; /* Darker gray for date number on hover */
+    color: #5E6B50; /* Darker green for date number on hover */
   }
   
   .current-day {
