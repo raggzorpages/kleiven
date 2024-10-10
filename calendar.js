@@ -1,47 +1,63 @@
 // calendar.js
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Get the calendar element from the DOM
     var calendarEl = document.getElementById('calendar');
 
-    // Initialize FullCalendar
+    // Initialize FullCalendar on the element
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        // Specify the initial view of the calendar
+        // Define the initial view to be a grid month view
         initialView: 'dayGridMonth',
-        
-        // Add navigation buttons and views to the header toolbar
+
+        // Add navigation buttons and multiple view options (month, week, day)
         headerToolbar: {
-            left: 'prev,next today',  // Left side buttons
-            center: 'title',          // Center title showing the month and year
-            right: 'dayGridMonth,timeGridWeek,timeGridDay' // Right side buttons for view selection
+            left: 'prev,next today',  // Navigation buttons on the left
+            center: 'title',          // Display the current month and year
+            right: 'dayGridMonth,timeGridWeek,timeGridDay' // View switcher on the right
         },
 
-        // Make the calendar selectable and editable
+        // Enable date selection
         selectable: true,
+
+        // Allow the calendar to be editable (for dragging/resizing events)
         editable: true,
 
-        // When a date is clicked, alert the date string
+        // Define how to handle date click events
         dateClick: function(info) {
-            alert('Selected date: ' + info.dateStr); // Display selected date
+            // Alert the clicked date as a simple interaction
+            alert('You clicked on date: ' + info.dateStr);
         },
 
-        // Optionally, define events (You can fetch these dynamically if needed)
+        // Example events to render on the calendar
         events: [
             {
+                title: 'Conference Meeting',
+                start: '2024-10-15', // Example fixed date
+                end: '2024-10-17', // Example event end date
+                description: 'A multi-day event to test the calendar rendering.',
+                backgroundColor: '#ff5733',  // Event background color
+                borderColor: '#ff5733',  // Event border color
+            },
+            {
                 title: 'Sample Event',
-                start: new Date(), // Current day event as an example
-                description: 'A sample event for the current day.'
+                start: new Date(),  // Current day event
+                description: 'This is a sample event for today.',
+                backgroundColor: '#007bff',  // Custom color for event
+                borderColor: '#007bff'  // Custom border color
             }
         ]
     });
 
-    // Render the calendar on the page
+    // Logging to help debug if the calendar is initialized and rendered
+    console.log('Rendering calendar...');
     calendar.render();
-
-    // Call the function to display reservations (if necessary)
+    console.log('Calendar rendered successfully.');
+    
+    // Call the function to display reservations, if applicable
     displayReservations();
 });
 
-// Function to display reservations (you can replace this with actual functionality)
+// Function to display reservations in a separate section
 async function displayReservations() {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
@@ -53,7 +69,7 @@ async function displayReservations() {
     const container = document.getElementById('reservation-container');
     container.innerHTML = '';
 
-    // Example data rendering (replace this with actual data fetching if needed)
+    // Mockup: replace this with actual data fetching
     reservations.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('nav-card');
@@ -65,7 +81,7 @@ async function displayReservations() {
     });
 }
 
-// Function to remove items from reservation (you can replace this with actual functionality)
+// Function to remove items from reservation
 function removeFromReservation(item) {
     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
     reservations = reservations.filter(reservedItem => reservedItem !== item);
