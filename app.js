@@ -3,11 +3,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/fireba
 import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
   authDomain: "kleiven-d995b.firebaseapp.com",
-  databaseURL: "https://kleiven-d995b-default-rtdb.europe-west1.firebasedatabase.app",  // Ensure correct region
+  databaseURL: "https://kleiven-d995b-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "kleiven-d995b",
   storageBucket: "kleiven-d995b.appspot.com",
   messagingSenderId: "790753027743",
@@ -17,10 +17,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);  // Optional: Initialize Firebase Analytics
-const db = getDatabase(app);  // Initialize Realtime Database
+const analytics = getAnalytics(app);
+const db = getDatabase(app);
 
-// Function to render equipment to the page, including remove button
+// Render equipment to the page
 function renderEquipment(equipmentData) {
   const equipmentContainer = document.getElementById('equipment-container');
   equipmentContainer.innerHTML = '';  // Clear previous content
@@ -31,15 +31,17 @@ function renderEquipment(equipmentData) {
     equipmentCard.classList.add('nav-card');
     equipmentCard.innerHTML = `
       <h3>${item.title}</h3>
+      <p>Price per day: ${item.price_per_day}</p>
+      <p>Amount: ${item.amount}</p>
+      <p>Product Info: ${item.product_info}</p>
+      <p>Category: ${item.category}</p>
       <p>Location: ${item.location}</p>
-      <p>${item.description}</p>
-      <img src="images/${item.image_url}" alt="${item.title}" style="width: 100px;">
+      <img src="images/${item.image_url}" alt="${item.title}" style="width: 150px;">
       <button class="remove-button" data-id="${id}">Remove</button>
     `;
     equipmentContainer.appendChild(equipmentCard);
   }
 
-  // Add event listeners to all remove buttons
   const removeButtons = document.querySelectorAll('.remove-button');
   removeButtons.forEach(button => {
     button.addEventListener('click', function () {
@@ -49,7 +51,7 @@ function renderEquipment(equipmentData) {
   });
 }
 
-// Function to remove equipment from Firebase and update the UI
+// Remove equipment from Firebase
 function removeEquipment(equipmentId) {
   const equipmentRef = ref(db, 'equipment/' + equipmentId);
   remove(equipmentRef)
@@ -76,15 +78,18 @@ function setupRealtimeListener() {
   });
 }
 
-// Function to add new equipment to the database and reference local image
-async function addEquipment(title, description, location, imageUrl) {
+// Add new equipment to Firebase
+async function addEquipment(title, pricePerDay, amount, productInfo, category, location, imageUrl) {
   try {
-    const newEquipmentRef = push(ref(db, 'equipment/'));  // Reference for the new equipment
+    const newEquipmentRef = push(ref(db, 'equipment/'));
     await set(newEquipmentRef, {
       title: title,
-      description: description,
+      price_per_day: pricePerDay,
+      amount: amount,
+      product_info: productInfo,
+      category: category,
       location: location,
-      image_url: imageUrl  // Just use the image filename
+      image_url: imageUrl
     });
 
     alert('Equipment added successfully!');
@@ -94,17 +99,20 @@ async function addEquipment(title, description, location, imageUrl) {
   }
 }
 
-// Fetch and display equipment in real-time on page load
-document.addEventListener("DOMContentLoaded", setupRealtimeListener);
-
-// Add event listener to the equipment form
+// Event listener for form submission
 document.getElementById('equipment-form').addEventListener('submit', async function (event) {
   event.preventDefault();
   const title = document.getElementById('title').value.trim();
-  const description = document.getElementById('description').value.trim();
+  const pricePerDay = document.getElementById('price_per_day').value.trim();
+  const amount = document.getElementById('amount').value.trim();
+  const productInfo = document.getElementById('product_info').value.trim();
+  const category = document.getElementById('category').value.trim();
   const location = document.getElementById('location').value.trim();
-  const imageUrl = document.getElementById('image_url').value.trim();  // Get the image filename
+  const imageUrl = document.getElementById('image_url').value.trim();
 
-  await addEquipment(title, description, location, imageUrl);
+  await addEquipment(title, pricePerDay, amount, productInfo, category, location, imageUrl);
   document.getElementById('equipment-form').reset();
 });
+
+// Fetch and display equipment in real-time on page load
+document.addEventListener("DOMContentLoaded", setupRealtimeListener);

@@ -119,7 +119,7 @@ footer {
 /* Equipment Grid */
 #equipment-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));  /* Responsive grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));  /* Responsive grid layout with larger cards */
     gap: 20px;  /* Space between items */
     justify-content: center;  /* Center the grid */
     max-width: 1200px;  /* Limit the grid's maximum width */
@@ -133,36 +133,30 @@ footer {
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
-    padding: 15px;
-    max-width: 220px;
+    padding: 20px;  /* Increase padding */
+    max-width: 300px;  /* Larger card size */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Subtle shadow */
     margin: 0 auto;  /* Center the card within its grid cell */
 }
 
 .nav-card h3 {
     margin: 10px 0;
-    font-size: 1.2em;
+    font-size: 1.5em;  /* Slightly larger font size */
     font-weight: 600;
     color: #5E6B50;
 }
 
-.nav-card .location {
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 10px;
-}
-
 .nav-card p {
-    font-size: 0.95em;
+    font-size: 1em;
     color: #333;
     margin: 10px 0;
 }
 
 .nav-card img {
-    width: 100%;
+    width: 100%; /* Make the image fill the card width */
     height: auto;
     margin-top: 10px;
-    max-width: 180px;
+    max-width: 250px;  /* Ensure a good image size */
 }
 
 .nav-card button {
@@ -178,102 +172,6 @@ footer {
 
 .nav-card button:hover {
     background-color: #7F211B;
-}
-
-/* Add Item Button */
-.add-item-button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #9E2B25;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.add-item-button:hover {
-    background-color: #7F211B;
-}
-
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 8px;
-    position: relative;
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-
-    #equipment-container {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    }
-
-    .nav-card {
-        max-width: 180px;
-    }
-
-    .modal-content {
-        margin-top: 20%;
-    }
-}
-
-.add-equipment-button {
-    background-color: #9E2B25; /* Dark red background color */
-    color: #FFFFFF; /* White text */
-    padding: 12px 24px; /* Add some padding for the button */
-    border: none; /* Remove the default border */
-    border-radius: 8px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-weight: bold; /* Bold text */
-    font-size: 16px; /* Slightly larger font size */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    margin: 20px 0; /* Add some margin to the button */
-}
-
-.add-equipment-button:hover {
-    background-color: #7F211B; /* Darker red when hovering */
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
 }
 
 /* Form Styling */
@@ -297,7 +195,7 @@ form label {
     color: #5E6B50;  /* Matching text color */
 }
 
-form input, form textarea {
+form input, form textarea, form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 12px;
@@ -311,7 +209,13 @@ form input, form textarea {
     transition: border-color 0.3s ease;
 }
 
-form input:focus, form textarea:focus {
+/* Dropdown Styling */
+select {
+    background-color: #F0EBD8;  /* Match the input field style */
+    appearance: none;
+}
+
+form input:focus, form textarea:focus, form select:focus {
     border-color: #9E2B25;  /* Highlight color on focus */
     outline: none;  /* Remove default outline */
 }
@@ -333,7 +237,22 @@ form button:hover {
     background-color: #7F211B;  /* Darker red on hover */
 }
 
-textarea {
-    resize: vertical;  /* Allow vertical resizing only */
-    min-height: 100px;  /* Ensure enough space for text */
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    #equipment-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .nav-card {
+        max-width: 180px;
+    }
+
+    .modal-content {
+        margin-top: 20%;
+    }
 }
