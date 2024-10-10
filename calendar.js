@@ -5,6 +5,7 @@ const nextMonthButton = document.getElementById('next-month');
 
 let currentDate = new Date();
 
+// Function to render the calendar
 const renderCalendar = () => {
   const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
@@ -40,6 +41,9 @@ const renderCalendar = () => {
     dayElement.classList.add('day-number');
     dayElement.textContent = day;
 
+    const dateStr = `${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    
+    // Highlight the current day
     if (day === new Date().getDate() &&
         currentDate.getMonth() === new Date().getMonth() &&
         currentDate.getFullYear() === new Date().getFullYear()) {
@@ -50,6 +54,7 @@ const renderCalendar = () => {
   }
 };
 
+// Add previous and next month functionality
 prevMonthButton.addEventListener('click', () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
@@ -60,4 +65,4 @@ nextMonthButton.addEventListener('click', () => {
   renderCalendar();
 });
 
-renderCalendar();
+renderCalendar(); // Ensure this function is called to display the calendar

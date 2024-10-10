@@ -1,0 +1,57 @@
+/* Style the section containing the booking table */
+section {
+    margin-top: 40px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #F0EBD8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Booking table styles */
+.booking-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; /* Center the table */
+    border-collapse: collapse;
+    background-color: #947822; /* Match background with existing site colors */
+    border-radius: 10px;
+    overflow: hidden; /* Rounded corners effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.booking-table th, .booking-table td {
+    padding: 15px;
+    text-align: left;
+    color: #F0EBD8;
+    font-weight: bold;
+    border-bottom: 1px solid #D5CDB6; /* Subtle border for table rows */
+}
+
+.booking-table th {
+    background-color: #9E2B25; /* Dark red for the header background */
+}
+
+.booking-table td {
+    background-color: #F0EBD8; /* Light color for table cells */
+    color: #5E6B50; /* Dark green text */
+}
+
+.booking-table tr:nth-child(even) td {
+    background-color: #D5CDB6; /* Alternate row background */
+}
+
+/* Hover effect for rows */
+.booking-table tr:hover td {
+    background-color: #7F211B; /* Darker background on hover */
+    color: #FFFFFF;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .booking-table th, .booking-table td {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}

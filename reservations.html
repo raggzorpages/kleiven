@@ -6,13 +6,13 @@
   <title>Simple Calendar</title>
   <link rel="stylesheet" href="calendar.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="booking.css"> <!-- Make sure booking.css is linked -->
 </head>
 <header>
     <h1>Welcome to Equipment Booking and Listing</h1>
 </header>
 
 <nav>
-    <!-- Updated navigation -->
     <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="equipment.html">Equipment</a></li>
@@ -34,6 +34,24 @@
     </div>
   </div>
 
+  <!-- Booking Table -->
+  <section>
+    <h2>Bookings</h2>
+    <table id="booking-table" class="booking-table">
+      <thead>
+        <tr>
+          <th>Booking</th>
+          <th>Contact</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="booking-table-body">
+        <!-- Booking rows will be dynamically injected here -->
+      </tbody>
+    </table>
+  </section>
+
   <script src="calendar.js"></script>
+  <script src="booking.js"></script> <!-- Ensure both scripts are included -->
 </body>
 </html>

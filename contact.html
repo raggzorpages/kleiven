@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+<nav>
+    <!-- Updated navigation -->
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="equipment.html">Equipment</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+</nav>
+
+  <main>
+    <form id="contact-form">
+      <label for="bookingName">Booking Name:</label>
+      <input type="text" id="bookingName" required>
+
+      <label for="contact">Contact Information:</label>
+      <input type="text" id="contact" required>
+
+      <label for="dateFrom">Date From:</label>
+      <input type="date" id="dateFrom" required>
+
+      <label for="dateTo">Date To:</label>
+      <input type="date" id="dateTo" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <script type="module">
+    import { addBooking } from './booking.js';
+
+    document.getElementById('contact-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      const bookingName = document.getElementById('bookingName').value;
+      const contact = document.getElementById('contact').value;
+      const dateFrom = document.getElementById('dateFrom').value;
+      const dateTo = document.getElementById('dateTo').value;
+
+      addBooking(bookingName, contact, dateFrom, dateTo);  // Add the new booking
+
+      alert('Booking submitted!');
+      document.getElementById('contact-form').reset();  // Reset the form after submission
+    });
+  </script>
+</body>
+</html>
