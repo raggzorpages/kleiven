@@ -88,3 +88,41 @@ function removeFromReservation(item) {
     localStorage.setItem('reservations', JSON.stringify(reservations));
     displayReservations();
 }
+// calendar.js (as a module)
+
+export function initCalendar() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        selectable: true,
+        editable: true,
+        dateClick: function(info) {
+            alert('Selected date: ' + info.dateStr);
+        },
+        events: [
+            {
+                title: 'Conference Meeting',
+                start: '2024-10-15',
+                end: '2024-10-17',
+                backgroundColor: '#ff5733',
+                borderColor: '#ff5733',
+            },
+            {
+                title: 'Sample Event',
+                start: new Date(),
+                backgroundColor: '#007bff',
+                borderColor: '#007bff'
+            }
+        ]
+    });
+
+    console.log('Rendering calendar...');
+    calendar.render();
+    console.log('Calendar rendered successfully.');
+}
