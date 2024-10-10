@@ -76,18 +76,15 @@ function setupRealtimeListener() {
   });
 }
 
-// Function to add new equipment to the database and update UI immediately
+// Function to add new equipment to the database and reference local image
 async function addEquipment(title, description, location, imageUrl) {
   try {
-    const newEquipmentRef = push(ref(db, 'equipment/'));
-    const newEquipmentKey = newEquipmentRef.key;  // Get the unique key for the new entry
-
-    // Add new equipment to Firebase
+    const newEquipmentRef = push(ref(db, 'equipment/'));  // Reference for the new equipment
     await set(newEquipmentRef, {
       title: title,
       description: description,
       location: location,
-      image_url: imageUrl
+      image_url: imageUrl  // Just use the image filename
     });
 
     alert('Equipment added successfully!');
@@ -101,12 +98,13 @@ async function addEquipment(title, description, location, imageUrl) {
 document.addEventListener("DOMContentLoaded", setupRealtimeListener);
 
 // Add event listener to the equipment form
-document.getElementById('equipment-form').addEventListener('submit', function (event) {
+document.getElementById('equipment-form').addEventListener('submit', async function (event) {
   event.preventDefault();
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
   const location = document.getElementById('location').value.trim();
-  const imageUrl = document.getElementById('image_url').value.trim();
-  addEquipment(title, description, location, imageUrl);
+  const imageUrl = document.getElementById('image_url').value.trim();  // Get the image filename
+
+  await addEquipment(title, description, location, imageUrl);
   document.getElementById('equipment-form').reset();
 });
