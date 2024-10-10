@@ -1,5 +1,5 @@
-// Import FullCalendar from the CDN
-import { Calendar } from 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js';
+// Import FullCalendar as an ES6 module
+import { Calendar } from 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.min.js';
 
 // Initialize the calendar
 export function initCalendar() {
