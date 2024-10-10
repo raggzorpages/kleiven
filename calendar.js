@@ -1,15 +1,36 @@
-// Wait for the DOM to be fully loaded before executing the script
+// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Get the calendar element
+    var calendarEl = document.getElementById('calendar');
     
-    // Initialize Flatpickr on the input element with id "calendar"
-    flatpickr("#calendar", {
-        dateFormat: "Y-m-d", // Set the date format to Year-Month-Day
-        minDate: "today",    // Prevent past dates from being selectable
-        defaultDate: null,   // No default date, allows the user to pick any future date
-        onChange: function(selectedDates, dateStr, instance) {
-            // This function is triggered whenever a date is selected
-            console.log('Selected date: ' + dateStr); // Log the selected date
-            alert('You have selected: ' + dateStr);   // Alert the user of the selected date
+    // Initialize the FullCalendar instance
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Full month grid view
+        headerToolbar: {
+            left: 'prev,next today',  // Navigation buttons
+            center: 'title',          // Title of the current month
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'  // View options: month, week, day
+        },
+        selectable: true,  // Allow users to select dates
+        selectHelper: true, // Visual aid for selecting dates
+        events: [
+            // You can add pre-existing events here
+            {
+                title: 'Reservation 1',
+                start: '2024-10-15',
+                end: '2024-10-17'
+            },
+            {
+                title: 'Reservation 2',
+                start: '2024-10-22'
+            }
+        ],
+        select: function(info) {
+            // Action when dates are selected
+            alert('Selected dates: ' + info.startStr + ' to ' + info.endStr);
         }
     });
+
+    // Render the calendar
+    calendar.render();
 });
