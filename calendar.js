@@ -6,7 +6,7 @@ const nextMonthButton = document.getElementById('next-month');
 let currentDate = new Date();
 
 // Function to render the calendar
-const renderCalendar = () => {
+const renderCalendar = (bookings = {}) => {
   const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
   
@@ -16,7 +16,6 @@ const renderCalendar = () => {
   const year = currentDate.getFullYear();
   monthYearDisplay.textContent = `${monthName} ${year}`;
 
-  // Adjust day names to start with Monday
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   dayNames.forEach(day => {
     const dayElement = document.createElement('div');
@@ -25,17 +24,14 @@ const renderCalendar = () => {
     calendarDays.appendChild(dayElement);
   });
 
-  // Calculate the first day of the month, adjusting for Monday start
-  let adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1; // Adjust Sunday (0) to be last (6)
+  let adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1;
 
-  // Fill in the empty spaces before the first day of the month
   for (let i = 0; i < adjustedFirstDay; i++) {
     const emptyDay = document.createElement('div');
     emptyDay.classList.add('day-number');
     calendarDays.appendChild(emptyDay);
   }
 
-  // Create the days in the current month
   for (let day = 1; day <= daysInMonth; day++) {
     const dayElement = document.createElement('div');
     dayElement.classList.add('day-number');
@@ -43,7 +39,14 @@ const renderCalendar = () => {
 
     const dateStr = `${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     
-    // Highlight the current day
+    // Loop through bookings and highlight if the date falls within the booking range
+    for (let id in bookings) {
+      const booking = bookings[id];
+      if (dateStr >= booking.dateFrom && dateStr <= booking.dateTo) {
+        dayElement.classList.add('booking-highlight');  // Highlight booked dates
+      }
+    }
+
     if (day === new Date().getDate() &&
         currentDate.getMonth() === new Date().getMonth() &&
         currentDate.getFullYear() === new Date().getFullYear()) {
@@ -65,4 +68,4 @@ nextMonthButton.addEventListener('click', () => {
   renderCalendar();
 });
 
-renderCalendar(); // Ensure this function is called to display the calendar
+renderCalendar();  // Call initially to render the calendar

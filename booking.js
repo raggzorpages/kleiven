@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
-// Initialize Firebase
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC3nmngHjP8vAlkfr_T9cw52ZyyJyoWmKU",
   authDomain: "kleiven-d995b.firebaseapp.com",
@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Reference to the bookings in Firebase database
+// Reference to bookings in Firebase
 const bookingsRef = ref(db, 'bookings/');
 
 // Function to render bookings to the table
@@ -43,13 +43,14 @@ function renderBookings(bookingsData) {
 onValue(bookingsRef, (snapshot) => {
   const bookingsData = snapshot.val();
   if (bookingsData) {
-    renderBookings(bookingsData);  // Update the table with new data in real-time
+    renderBookings(bookingsData);  // Update the booking table with new data
+    renderCalendar(bookingsData);  // Pass bookings data to the calendar
   } else {
     console.log("No bookings available.");
   }
 });
 
-// Function to add a new booking (called by the contact form)
+// Function to add a new booking
 export function addBooking(bookingName, contact, dateFrom, dateTo) {
   const newBookingRef = push(bookingsRef);  // Create a new booking reference
   set(newBookingRef, {
@@ -57,5 +58,9 @@ export function addBooking(bookingName, contact, dateFrom, dateTo) {
     contact: contact,
     dateFrom: dateFrom,
     dateTo: dateTo
+  }).then(() => {
+    console.log("Booking added to Firebase:", bookingName, contact, dateFrom, dateTo);
+  }).catch((error) => {
+    console.error("Error adding booking to Firebase:", error);
   });
 }
