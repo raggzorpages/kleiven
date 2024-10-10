@@ -1,36 +1,45 @@
-// Wait for the DOM to be fully loaded
+// Wait for the DOM to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the calendar element
-    var calendarEl = document.getElementById('calendar');
     
-    // Initialize the FullCalendar instance
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // Full month grid view
-        headerToolbar: {
-            left: 'prev,next today',  // Navigation buttons
-            center: 'title',          // Title of the current month
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'  // View options: month, week, day
+    // Initialize DayPilot Lite calendar
+    var calendar = new DayPilot.Calendar("calendar");
+
+    // Set the view type to show a weekly calendar
+    calendar.viewType = "Week";  // You can change this to "Day" or "Month" as needed
+
+    // Set calendar height
+    calendar.heightSpec = "Full";
+
+    // Add example events to the calendar
+    calendar.events.list = [
+        {
+            id: "1",
+            text: "Reservation 1",
+            start: "2024-10-15T10:30:00",
+            end: "2024-10-15T12:30:00"
         },
-        selectable: true,  // Allow users to select dates
-        selectHelper: true, // Visual aid for selecting dates
-        events: [
-            // You can add pre-existing events here
-            {
-                title: 'Reservation 1',
-                start: '2024-10-15',
-                end: '2024-10-17'
-            },
-            {
-                title: 'Reservation 2',
-                start: '2024-10-22'
-            }
-        ],
-        select: function(info) {
-            // Action when dates are selected
-            alert('Selected dates: ' + info.startStr + ' to ' + info.endStr);
+        {
+            id: "2",
+            text: "Reservation 2",
+            start: "2024-10-22T09:00:00",
+            end: "2024-10-22T11:00:00"
         }
-    });
+    ];
 
     // Render the calendar
-    calendar.render();
+    calendar.init();
+
+    // Optional: handle date/time selection to allow for user interaction
+    calendar.onTimeRangeSelected = function(args) {
+        var title = prompt("Enter the title of your reservation:");
+        if (title) {
+            calendar.events.add({
+                id: DayPilot.guid(),
+                text: title,
+                start: args.start,
+                end: args.end
+            });
+        }
+        calendar.clearSelection();
+    };
 });

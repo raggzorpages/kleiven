@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Your Reservations | Equipment Booking and Listing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js"></script>
-    <script src="calendar.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css" rel="stylesheet">
+
+    <!-- DayPilot Lite JS -->
+    <script src="https://code.daypilot.org/DayPilot-Lite.min.js"></script>
+
+    <!-- Custom CSS for the calendar -->
     <link rel="stylesheet" href="calendar.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,8 +29,8 @@
     <main>
         <section>
             <h2>Your Reservation Calendar</h2>
-            <!-- Calendar container -->
-            <div id="calendar"></div>
+            <!-- Calendar container for DayPilot -->
+            <div id="calendar" style="border: 1px solid #ccc; margin-bottom: 20px;"></div>
         </section>
         <section>
             <h2>Your Reservation Basket</h2>
@@ -43,7 +44,7 @@
         <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
     </footer>
 
-    <!-- FullCalendar JS -->
-    
+    <!-- Custom JS -->
+    <script src="calendar.js"></script>
 </body>
 </html>
