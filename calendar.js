@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
-    // Check if FullCalendar is properly loaded
+    // Ensure FullCalendar is loaded before using it
     if (typeof FullCalendar === 'undefined') {
         console.error('FullCalendar is not defined. Ensure FullCalendar JS is loaded before this script.');
         return;
