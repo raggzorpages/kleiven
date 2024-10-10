@@ -4,23 +4,15 @@
     <meta charset="UTF-8">
     <title>Your Reservations | Equipment Booking and Listing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Include Supabase JS library -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <!-- Include app.js -->
-    <script src="app.js"></script>
-    <!-- Include reservations.js -->
-    <script src="reservations.js"></script>
+    <link rel="stylesheet" href="calendar.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/dist/fullcalendar.min.css' rel='stylesheet' />
 </head>
 <body>
-
     <header>
         <h1>Your Reservations</h1>
     </header>
 
     <nav>
-        <!-- Same navigation as in index.html -->
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="equipment.html">Equipment</a></li>
@@ -30,6 +22,11 @@
     </nav>
 
     <main>
+        <section>
+            <h2>Your Reservation Calendar</h2>
+            <!-- Calendar container -->
+            <div id="calendar"></div>
+        </section>
         <section>
             <h2>Your Reservation Basket</h2>
             <div id="reservation-container">
@@ -41,6 +38,11 @@
     <footer>
         <p>&copy; 2024 Equipment Booking and Listing. All rights reserved.</p>
     </footer>
+
+    <!-- Include FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/dist/fullcalendar.min.js"></script>
+    <!-- Link to the new calendar.js -->
+    <script src="calendar.js"></script>
 
 </body>
 </html>
